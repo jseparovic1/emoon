@@ -54,7 +54,7 @@ class CoinBase extends BaseExchange implements CoinListingInterface
 
         $coins = [];
         foreach ($data as $coin) {
-            $coins[$coin->id] = $coin->name;
+            $coins[] = $coin->id;
         }
 
         return $coins;

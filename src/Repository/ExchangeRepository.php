@@ -14,6 +14,30 @@ class ExchangeRepository extends ServiceEntityRepository
         parent::__construct($registry, Exchange::class);
     }
 
+    public function findAllCoins($exchangeId)
+    {
+        $conn = $this->getEntityManager()
+            ->getConnection();
+
+        $sql = '
+            SELECT DISTINCT symbol 
+            FROM coin
+            INNER JOIN exchange_coins ec ON ec.coin_id = coin.id
+            WHERE ec.exchange_id = :exchangeId;
+        ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['exchangeId' => $exchangeId]);
+
+        $result = $stmt->fetchAll();
+        $data = [];
+
+        foreach ($result as $item) {
+            $data[] = $item['symbol'];
+        }
+
+        return $data;
+    }
+
     /**
      * {@inheritdoc}
      */

@@ -148,7 +148,7 @@ class Coin implements ResourceInterface
     public function removeExchange(Exchange $exchange)
     {
         if ($this->exchanges->contains($exchange)) {
-            $this->exchanges->remove($exchange);
+            $this->exchanges->removeElement($exchange);
         }
     }
 }

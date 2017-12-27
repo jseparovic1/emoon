@@ -2,19 +2,20 @@
 
 namespace App\Controller;
 
-use App\Services\ExchangeCoinFetcher;
+use App\Repository\ExchangeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 class ExchangeController extends Controller
 {
     /**
-     * @param ExchangeCoinFetcher $coinBase
+     * @param ExchangeRepository $exchangeRepository
      * @return Response
      */
-    public function index(ExchangeCoinFetcher $coinBase)
+    public function index(ExchangeRepository $exchangeRepository)
     {
-        dump($coinBase->updateCoins());
-        return new Response("hoho");
+        return $this->render('index.html.twig',
+            ['exchanges' => $exchangeRepository->findAll()]
+        );
     }
 }

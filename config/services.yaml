@@ -30,11 +30,14 @@ services:
         arguments: ['@coinbase.client']
         autowire: false
 
+    App\Utils\ExchangeMapper:
+        arguments: ['@App\Services\Exchanges\CoinBase']
+        autowire: false
+
 #   Master exchanges fetcher
     App\Services\ExchangeCoinFetcher:
         arguments:
-            - '@App\Utils\ExchangeNameMapper'
+            - '@App\Utils\ExchangeMapper'
             - '@App\Repository\ExchangeRepository'
             - '@App\Repository\CoinRepository'
-            - '@App\Services\Exchanges\CoinBase'
         autowire: false

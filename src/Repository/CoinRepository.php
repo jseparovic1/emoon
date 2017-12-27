@@ -20,7 +20,7 @@ class CoinRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('coin');
         $qb->distinct(true);
 
-        foreach (array_keys($coins) as $coin) {
+        foreach ($coins as $coin) {
             $qb->orWhere("coin.symbol =:coin_{$i}");
             $qb->setParameter("coin_{$i}", $coin);
             $i++;

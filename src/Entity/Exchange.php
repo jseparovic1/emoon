@@ -105,15 +105,17 @@ class Exchange implements ResourceInterface
 
     public function addCoin(Coin $coin)
     {
-        if ($this->coins->contains($coin)) {
+        if (!$this->coins->contains($coin)) {
             $this->coins->add($coin);
+            $coin->addExchange($this);
         }
     }
 
     public function removeCoin(Coin $coin)
     {
         if ($this->coins->contains($coin)) {
-            $this->coins->remove($coin);
+            $this->coins->removeElement($coin);
+            $coin->removeExchange($this);
         }
     }
 }
