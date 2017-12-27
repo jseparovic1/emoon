@@ -1,0 +1,40 @@
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{Entity,Migrations,Tests}'
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+#   Custom services
+    coimarketcap.client:
+       alias: eight_points_guzzle.client.api_coinmarketcap
+    coinbase.client:
+       alias: eight_points_guzzle.client.api_exchange_gdax
+
+    App\Command\CoinFetcher:
+        arguments: ['@App\Repository\CoinRepository', '@coimarketcap.client', '@Doctrine\ORM\EntityManagerInterface']
+        autowire: false
+
+#   Exchanges
+    App\Services\Exchanges\CoinBase:
+        arguments: ['@coinbase.client']
+        autowire: false
+
+#   Master exchanges fetcher
+    App\Services\ExchangeCoinFetcher:
+        arguments:
+            - '@App\Utils\ExchangeNameMapper'
+            - '@App\Repository\ExchangeRepository'
+            - '@App\Repository\CoinRepository'
+            - '@App\Services\Exchanges\CoinBase'
+        autowire: false

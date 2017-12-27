@@ -1,0 +1,23 @@
+eight_points_guzzle:
+    logging: true
+    clients:
+        api_coinmarketcap:
+            base_url: "https://api.coinmarketcap.com"
+            options:
+                http_errors: false
+                headers:
+                    Accept: "application/json"
+                curl:
+                    sslversion: 1 # or !php/const:CURL_HTTP_VERSION_1_0 for symfony >= 3.2
+                timeout: 30
+            plugin: ~
+        api_exchange_gdax:
+            base_url: "https://api.gdax.com"
+            options:
+                http_errors: false
+                headers:
+                    Accept: "application/json"
+                curl:
+                    sslversion: 1
+                timeout: 30
+            plugin: ~
