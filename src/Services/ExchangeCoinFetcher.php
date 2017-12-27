@@ -57,6 +57,7 @@ class ExchangeCoinFetcher
 
             /** @var Exchange $exchange */
             $exchange = $this->exchangeRepository->findOneBy(['name' => $exchangeName]);
+            $exchange->setUpdatedAt(new \DateTime('now'));
 
             //Finds array of coins that are stored in exchange
             $exchangeStoredCoins = $this->exchangeRepository->findAllCoins($exchange->getId());
