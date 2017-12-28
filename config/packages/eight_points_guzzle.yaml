@@ -1,5 +1,5 @@
 eight_points_guzzle:
-    logging: true
+    logging: false
     clients:
         api_coinmarketcap:
             base_url: "https://api.coinmarketcap.com"

@@ -53,12 +53,12 @@ class CoinFetcher extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $start = 0;
-        $limit = 250;
+        $limit = 500;
 
         $output->writeln("<info>Starting coin import, please brace yourself</info>");
         $output->writeln("<info>Limit {$limit}</info>");
 
-        while ($start < 500) {
+        while (true) {
             $output->writeln("<info>Start {$start}</info>");
             $response = $this->client->get(sprintf('/v1/ticker?start=%s&limit=%s', $start, $limit));
 
@@ -78,13 +78,18 @@ class CoinFetcher extends Command
     protected function saveCoinData($data, $output)
     {
         foreach ($data as $coinData) {
-            $coin = $this->coinRepository->findOneBy(['symbol' => $coinData->symbol]);
+            $coin = $this->coinRepository->findOneBy([
+                'name' => $coinData->name,
+                'symbol' => $coinData->symbol]
+            );
 
-            if ($coin instanceof Coin && $coin->getName() !== $coinData->name) {
-                $coin->setRank($coinData->rank);
-                $this->entityManager->persist($coin);
+            if ($coin instanceof Coin) {
+                if ((int)$coinData->rank !== $coin->getRank()) {
+                    $output->writeln("<info>Updating rank {$coin->getName()} OLD:{$coin->getRank()} NEW:{$coinData->rank}</info>");
 
-                $output->writeln("<error>Updating rank {$coin->getName()}</error>");
+                    $coin->setRank($coinData->rank);
+                    $this->entityManager->persist($coin);
+                }
                 continue;
             }
 
@@ -94,7 +99,7 @@ class CoinFetcher extends Command
             $coin->setRank($coinData->rank);
             $this->entityManager->persist($coin);
 
-            $output->writeln("<succes>Saving {$coin->getName()}</succes>");
+            $output->writeln("<success>Saving {$coin->getName()}</success>");
         }
 
         $this->entityManager->flush();

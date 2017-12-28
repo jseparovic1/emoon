@@ -23,10 +23,8 @@
         </field>
         <indexes>
             <index columns="symbol"/>
+            <index columns="name"/>
         </indexes>
-        <unique-constraints>
-            <unique-constraint columns="symbol"/>
-        </unique-constraints>
         <many-to-many field="exchanges" mapped-by="coins" target-entity="App\Entity\Exchange"/>
     </entity>
 </doctrine-mapping>

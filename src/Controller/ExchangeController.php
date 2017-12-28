@@ -18,7 +18,7 @@ class ExchangeController extends Controller
         ExchangeRepository $exchangeRepository,
         ExchangeCoinFetcher $fetcher
     ) {
-//        $fetcher->updateCoins();
+        $fetcher->updateCoins();
         return $this->render('index.html.twig',
             ['exchanges' => $exchangeRepository->findAll()]
         );
