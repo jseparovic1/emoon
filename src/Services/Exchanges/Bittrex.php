@@ -7,20 +7,15 @@ use GuzzleHttp\ClientInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class CoinBase
+ * Class Bittrex
  * @package App\Services\Exchanges
  */
-class CoinBase implements CoinListingInterface
+class Bittrex implements CoinListingInterface
 {
     /**
      * @var ClientInterface
      */
     private $client;
-
-    /**
-     * @var bool
-     */
-    protected $needsNormalization = true;
 
     public function __construct(Client $client)
     {
@@ -29,11 +24,12 @@ class CoinBase implements CoinListingInterface
 
     public function getCoinList(): ?array
     {
-        $response = $this->client->get('currencies');
+        $response = $this->client->get('/api/v1.1/public/getcurrencies');
 
         if ($response->getStatusCode() == Response::HTTP_OK) {
             $data = json_decode($response->getBody()->getContents());
-            return $this->normalize($data);
+
+            return $this->normalize($data->result);
         }
 
         return [];
@@ -41,15 +37,9 @@ class CoinBase implements CoinListingInterface
 
     protected function normalize(array $data)
     {
-        $data = array_filter($data, function ($coin) {
-            if (!in_array($coin->id, ['EUR', 'GBP', 'USD'])) {
-                return $coin;
-            }
-        });
-
         $coins = [];
         foreach ($data as $coin) {
-            $coins[] = $coin->id;
+            $coins[] = $coin->Currency;
         }
 
         return $coins;
