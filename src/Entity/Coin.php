@@ -20,6 +20,9 @@ class Coin implements ResourceInterface
     private $name;
 
     /** @var string */
+    private $nameCanonical;
+
+    /** @var string */
     private $symbol;
 
     /** @var int */
@@ -150,5 +153,15 @@ class Coin implements ResourceInterface
         if ($this->exchanges->contains($exchange)) {
             $this->exchanges->removeElement($exchange);
         }
+    }
+
+    public function getNameCanonical(): ?string
+    {
+        return $this->nameCanonical;
+    }
+
+    public function setNameCanonical(?string $nameCanonical)
+    {
+        $this->nameCanonical = $nameCanonical;
     }
 }

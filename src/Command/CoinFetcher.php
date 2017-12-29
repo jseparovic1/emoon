@@ -80,8 +80,8 @@ class CoinFetcher extends Command
         foreach ($data as $coinData) {
             $coin = $this->coinRepository->findOneBy([
                 'name' => $coinData->name,
-                'symbol' => $coinData->symbol]
-            );
+                'symbol' => $coinData->symbol
+            ]);
 
             if ($coin instanceof Coin) {
                 if ((int)$coinData->rank !== $coin->getRank()) {
@@ -97,6 +97,7 @@ class CoinFetcher extends Command
             $coin->setName($coinData->name);
             $coin->setSymbol($coinData->symbol);
             $coin->setRank($coinData->rank);
+            $coin->setNameCanonical($coinData->id);
             $this->entityManager->persist($coin);
 
             $output->writeln("<success>Saving {$coin->getName()}</success>");

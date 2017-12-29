@@ -7,6 +7,7 @@ use App\Repository\CoinRepository;
 use App\Repository\ExchangeRepository;
 use App\Services\Exchanges\CoinListingInterface;
 use App\Utils\ExchangeMapper;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class ExchangeCoinFetcher
@@ -30,19 +31,27 @@ class ExchangeCoinFetcher
     private $exchangeMapper;
 
     /**
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
+
+    /**
      * ExchangeCoinFetcher constructor.
      * @param ExchangeMapper $exchangeMapper
      * @param ExchangeRepository $exchangeRepository
      * @param CoinRepository $coinRepository
+     * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
         ExchangeMapper $exchangeMapper,
         ExchangeRepository $exchangeRepository,
-        CoinRepository $coinRepository
+        CoinRepository $coinRepository,
+        EventDispatcherInterface $eventDispatcher
     ) {
         $this->exchangeRepository = $exchangeRepository;
         $this->coinRepository = $coinRepository;
         $this->exchangeMapper = $exchangeMapper;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
