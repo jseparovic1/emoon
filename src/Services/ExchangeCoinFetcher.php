@@ -2,11 +2,15 @@
 
 namespace App\Services;
 
+use App\Entity\Coin;
 use App\Entity\Exchange;
+use App\Event\CoinAddedToExchangeEvent;
 use App\Repository\CoinRepository;
 use App\Repository\ExchangeRepository;
 use App\Services\Exchanges\CoinListingInterface;
+use App\Utils\EmonEvents;
 use App\Utils\ExchangeMapper;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -34,6 +38,10 @@ class ExchangeCoinFetcher
      * @var EventDispatcherInterface
      */
     private $eventDispatcher;
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
 
     /**
      * ExchangeCoinFetcher constructor.
@@ -41,17 +49,20 @@ class ExchangeCoinFetcher
      * @param ExchangeRepository $exchangeRepository
      * @param CoinRepository $coinRepository
      * @param EventDispatcherInterface $eventDispatcher
+     * @param LoggerInterface $logger
      */
     public function __construct(
         ExchangeMapper $exchangeMapper,
         ExchangeRepository $exchangeRepository,
         CoinRepository $coinRepository,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        LoggerInterface $logger
     ) {
         $this->exchangeRepository = $exchangeRepository;
         $this->coinRepository = $coinRepository;
         $this->exchangeMapper = $exchangeMapper;
         $this->eventDispatcher = $eventDispatcher;
+        $this->logger = $logger;
     }
 
     /**
@@ -108,9 +119,13 @@ class ExchangeCoinFetcher
      */
     private function addCoinsToExchange(Exchange $exchange, $coins)
     {
+        /** @var Coin $coin */
         foreach ($coins as $coin) {
             $exchange->addCoin($coin);
             $this->exchangeRepository->add($exchange);
+
+            $this->eventDispatcher->dispatch(EmonEvents::COIN_ADDED, new CoinAddedToExchangeEvent($coin, $exchange));
+            $this->logger->critical("COIN ADDED TO EXCHANGE : {$coin->getName()}");
         }
     }
 
