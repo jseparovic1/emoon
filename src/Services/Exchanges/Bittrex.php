@@ -2,6 +2,7 @@
 
 namespace App\Services\Exchanges;
 
+use App\Services\Exchanges\Exchange as BaseExchange;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
  * Class Bittrex
  * @package App\Services\Exchanges
  */
-class Bittrex implements CoinListingInterface
+class Bittrex extends BaseExchange implements CoinListingInterface
 {
     /**
      * @var ClientInterface
@@ -38,8 +39,9 @@ class Bittrex implements CoinListingInterface
     protected function normalize(array $data)
     {
         $coins = [];
+
         foreach ($data as $coin) {
-            $coins[] = $coin->Currency;
+            $coins[] =  $this->getNormalizedCoinSymbol($coin->Currency);
         }
 
         return $coins;

@@ -3,10 +3,18 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="https://jenil.github.io/bulmaswatch/flatly/bulmaswatch.min.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+        {% block nav %}
+            {% include('/_partials/nav.html.twig') %}
+        {% endblock %}
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block footer %}
+            {% include('/_partials/footer.html.twig') %}
+        {% endblock %}
+        <script>{% block javascripts %}{% endblock %}</script>
     </body>
 </html>

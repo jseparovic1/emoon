@@ -111,6 +111,11 @@ class Exchange implements ResourceInterface
         }
     }
 
+    public function hasCoin(Coin $coin)
+    {
+        return $this->coins->contains($coin);
+    }
+
     public function removeCoin(Coin $coin)
     {
         if ($this->coins->contains($coin)) {

@@ -1,10 +1,47 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    {% for exchange in exchanges %}
-        <h1>{{ exchange.name }}</h1> <span>Last update {{ exchange.updatedAt|date('d-m-y h:m') }}</span>
-        {% for coin in exchange.coins  %}
-            <li>{{ coin.symbol }} -> {{ coin.name }}</li>
-        {% endfor %}
-    {% endfor %}
+    <section class="container section">
+        <div class="content">
+            <p class="title is-4">Latest data updated {{ exchanges[0].updatedAt|ago }}</p>
+                <table>
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th> Coins </th>
+                        {% for exchange in exchanges %}
+                            <th> {{ exchange.name|capitalize }} </th>
+                        {% endfor %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for coin in coins %}
+                            <tr>
+                                <td>
+                                    <figure class="image is-32x32">
+                                        <img src="https://files.coinmarketcap.com/static/img/coins/32x32/{{ coin.nameCanonical }}.png" alt="{{ coin.name }}">
+                                    </figure>
+                                </td>
+                                <td>{{ coin.name }}</td>
+                                {% for exchange in exchanges %}
+                                    <td>
+                                    {% if exchange.hasCoin(coin) %}
+                                        <span class="icon is-small has-text-success"><i class="fa fa-check"></i></span>
+                                    {% else %}
+                                        <span class="icon is-small has-text-danger"><i class="fa fa-times-circle"></i></span>
+                                    {% endif %}
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+    </section>
+    {% include('_partials/hero.html.twig') %}
 {% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}
+
