@@ -17,7 +17,7 @@
         <field name="updatedAt" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
-        <many-to-many field="coins" target-entity="App\Entity\Coin">
+        <many-to-many field="coins" target-entity="App\Entity\Coin" inversed-by="exchanges">
             <join-table name="exchange_coins">
                 <join-columns>
                     <join-column name="exchange_id" referenced-column-name="id" />

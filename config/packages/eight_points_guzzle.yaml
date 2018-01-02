@@ -28,3 +28,12 @@ eight_points_guzzle:
                 curl:
                     sslversion: 1
                 timeout: 30
+        api_exchange_cryptopia:
+            base_url: "https://www.cryptopia.co.nz/"
+            options:
+                http_errors: false
+                headers:
+                    Accept: "application/json"
+                curl:
+                    sslversion: 1
+                timeout: 30

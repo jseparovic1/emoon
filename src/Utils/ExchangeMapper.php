@@ -5,6 +5,7 @@ namespace App\Utils;
 use App\Services\Exchanges\Bittrex;
 use App\Services\Exchanges\CoinBase;
 use App\Services\Exchanges\CoinListingInterface;
+use App\Services\Exchanges\Cryptopia;
 
 class ExchangeMapper
 {
@@ -13,7 +14,8 @@ class ExchangeMapper
     
     protected $exchangesNames = [
         CoinBase::class => 'coinbase',
-        Bittrex::class => 'bittrex'
+        Bittrex::class => 'bittrex',
+        Cryptopia::class => 'cryptopia'
     ];
 
     public function __construct(...$exchanges)

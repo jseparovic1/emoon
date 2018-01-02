@@ -15,7 +15,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        {% for coin in coins %}
+                        {% for coin in coinsPager.getCurrentPageResults %}
                             <tr>
                                 <td>
                                     <figure class="image is-32x32">
@@ -37,6 +37,14 @@
                     </tbody>
                 </table>
             </div>
+        <nav class="pagination  is-centered" role="navigation" aria-label="pagination">
+            {% if coinsPager.hasPreviousPage %}
+                <a class="pagination-previous" href="{{ url('app_exchanges_list', { 'page': coinsPager.previousPage  }) }}">Previous</a>
+            {% else %}
+                  <a class="pagination-previous" disabled="true">Previous</a>
+            {% endif %}
+            <a class="pagination-next" href="{{ url('app_exchanges_list', { 'page': coinsPager.nextPage }) }}">Next 100 -></a>
+        </nav>
     </section>
     {% include('_partials/hero.html.twig') %}
 {% endblock %}

@@ -4,8 +4,9 @@ namespace App\Event;
 
 use App\Entity\Coin;
 use App\Entity\Exchange;
+use Symfony\Component\EventDispatcher\Event;
 
-class CoinAddedToExchangeEvent
+class CoinAddedToExchangeEvent extends Event
 {
     /**
      * @var Coin

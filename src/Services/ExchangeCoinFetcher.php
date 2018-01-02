@@ -38,6 +38,7 @@ class ExchangeCoinFetcher
      * @var EventDispatcherInterface
      */
     private $eventDispatcher;
+
     /**
      * @var LoggerInterface
      */

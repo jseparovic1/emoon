@@ -23,6 +23,8 @@ services:
        alias: eight_points_guzzle.client.api_exchange_gdax
     bittrex.client:
        alias: eight_points_guzzle.client.api_exchange_bittrex
+    cryptopia.client:
+       alias: eight_points_guzzle.client.api_exchange_cryptopia
 
     App\Command\CoinFetcher:
         arguments: ['@App\Repository\CoinRepository', '@coimarketcap.client', '@Doctrine\ORM\EntityManagerInterface']
@@ -35,8 +37,14 @@ services:
     App\Services\Exchanges\Bittrex:
         arguments: ['@bittrex.client']
         autowire: false
+    App\Services\Exchanges\Cryptopia:
+        arguments: ['@cryptopia.client']
+        autowire: false
 
 #   Utils
     App\Utils\ExchangeMapper:
-        arguments: ['@App\Services\Exchanges\CoinBase', '@App\Services\Exchanges\Bittrex']
+        arguments:
+        - '@App\Services\Exchanges\CoinBase'
+        - '@App\Services\Exchanges\Bittrex'
+        - '@App\Services\Exchanges\Cryptopia'
         autowire: false
