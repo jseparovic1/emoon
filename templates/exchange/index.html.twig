@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <section class="container section">
+        <div class="content">
+            <div class="title">Exchanges</div>
+            <div class="subtitle">Latest data updated {{ exchanges[0].updatedAt|ago }}</div>
+            <table class="table">
+                <thead>
+                     <th>Name</th>
+                     <th>Twitter</th>
+                     <th>Coins</th>
+                     <th>Founded</th>
+                     <th>Country</th>
+                </thead>
+                <tbody>
+                {% for exchange in exchanges %}
+                    <tr>
+                        <td><a href="{{ exchange.affiliateLink }}">{{ exchange.name|capitalize }}</a></td>
+                        <td><a href="https://twitter.com/{{ exchange.twitter }}"><i class="fa fa-twitter"></i></a></td>
+                        <td>{{ exchange.coins|length }} </td>
+                        <td>1994</td>
+                        <td>Croatia</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}
+

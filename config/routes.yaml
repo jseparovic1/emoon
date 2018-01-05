@@ -1,3 +1,11 @@
-app_exchanges_list:
+app_main:
     path: /
+    controller: App\Controller\CoinController::index
+
+app_subscribe:
+    path: /subscribe
+    controller: App\Controller\SubscriptionController::create
+
+app_exchanges_list:
+    path: /exchanges
     controller: App\Controller\ExchangeController::index

@@ -73,7 +73,7 @@ class ExchangeCoinFetcher
     {
         /** @var CoinListingInterface $exchangeFetcher */
         foreach ($this->exchangeMapper->getExchanges() as $exchangeFetcher) {
-            $coins = $exchangeFetcher->getCoinList();
+            $coinsData = $exchangeFetcher->getCoinList();
             $exchangeName = $this->exchangeMapper->getExchangeName($exchangeFetcher);
 
             /** @var Exchange $exchange */
@@ -84,13 +84,13 @@ class ExchangeCoinFetcher
             $exchangeStoredCoins = $this->exchangeRepository->findAllCoins($exchange->getId());
 
             //if there is new coin in response it will be returned here
-            $newCoins = $this->getChangedCoins($coins, $exchangeStoredCoins);
+            $newCoins = $this->getChangedCoins($coinsData, $exchangeStoredCoins);
             if ($newCoins) {
                 $this->addCoinsToExchange($exchange, $newCoins);
             }
 
             //If there is coin in database that is not retried from response it will be returned
-            $removedCoins = $this->getChangedCoins($exchangeStoredCoins, $coins);
+            $removedCoins = $this->getChangedCoins($exchangeStoredCoins, $coinsData);
             if ($removedCoins) {
                 $this->removeCoinsFromExchange($exchange, $removedCoins);
             }
