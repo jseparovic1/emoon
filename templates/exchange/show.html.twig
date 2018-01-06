@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <section class="container section">
+        <div class="content">
+            <div class="title">{{ exchange.name|capitalize }}</div>
+            <div class="subtitle">Latest data updated {{ exchange.updatedAt|ago }}</div>
+            <div class="coins columns">
+                <ul>
+                    {% for coin in exchange.coins %}
+                        <li>{{ coin.symbol }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}
+

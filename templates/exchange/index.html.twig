@@ -11,6 +11,7 @@
                      <th>Coins</th>
                      <th>Founded</th>
                      <th>Country</th>
+                     <th>More</th>
                 </thead>
                 <tbody>
                 {% for exchange in exchanges %}
@@ -20,6 +21,7 @@
                         <td>{{ exchange.coins|length }} </td>
                         <td>1994</td>
                         <td>Croatia</td>
+                        <td><a class="button" href="{{ url('app_exchanges_show', {'id' : exchange.id}) }}">Info</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>

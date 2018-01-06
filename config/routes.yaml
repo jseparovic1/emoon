@@ -9,3 +9,7 @@ app_subscribe:
 app_exchanges_list:
     path: /exchanges
     controller: App\Controller\ExchangeController::index
+
+app_exchanges_show:
+    path: /exchanges/{id}
+    controller: App\Controller\ExchangeController::show
