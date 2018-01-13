@@ -1,3 +1,4 @@
+.idea
 /build/
 /node_modules/
 /var/*
@@ -14,7 +15,6 @@
 !var/SymfonyRequirements.php
 /public/build/fonts/glyphicons-*
 /public/build/images/glyphicons-*
-.idea
 ###> symfony/framework-bundle ###
 .env
 /public/bundles/
