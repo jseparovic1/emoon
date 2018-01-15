@@ -43,13 +43,16 @@
             {% else %}
                   <a class="pagination-previous" disabled="true">Previous</a>
             {% endif %}
-            <a class="pagination-next" href="{{ url('app_exchanges_list', { 'page': coinsPager.nextPage }) }}">Next 100 -></a>
+            <a class="pagination-next" href="{{ url('app_main', { 'page': coinsPager.nextPage }) }}">Next 100 -></a>
         </nav>
     </section>
     {% include('_partials/hero.html.twig') %}
 {% endblock %}
 
 {% block javascripts %}
+    <script>
+        console.log("hi fuckers!");
 
+    </script>
 {% endblock %}
 

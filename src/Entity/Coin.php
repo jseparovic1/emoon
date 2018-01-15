@@ -25,6 +25,12 @@ class Coin implements ResourceInterface
     /** @var string */
     private $symbol;
 
+    /** @var string */
+    private $priceUsd;
+
+    /** @var string */
+    private $marketCap;
+
     /** @var int */
     private $rank;
 
@@ -163,5 +169,25 @@ class Coin implements ResourceInterface
     public function setNameCanonical(?string $nameCanonical)
     {
         $this->nameCanonical = $nameCanonical;
+    }
+
+    public function getPriceUsd(): ?string
+    {
+        return $this->priceUsd;
+    }
+
+    public function setPriceUsd(?string $priceUsd): void
+    {
+        $this->priceUsd = $priceUsd;
+    }
+
+    public function getMarketCap(): ?string
+    {
+        return $this->marketCap;
+    }
+
+    public function setMarketCap(?string $marketCap): void
+    {
+        $this->marketCap = $marketCap;
     }
 }

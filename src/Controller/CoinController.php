@@ -25,7 +25,7 @@ class CoinController extends Controller
         CoinRepository $coinRepository,
         Request $request
     ) {
-//        $fetcher->updateCoins();
+        $fetcher->updateCoins();
 
         /** @var Pagerfanta $coinPaginator */
         $coinPaginator = $coinRepository->createPaginator($coinRepository->findAll(), ['rank' => 'ASC'], 100);

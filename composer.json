@@ -16,6 +16,7 @@
         "symfony/monolog-bundle": "^3.1",
         "symfony/orm-pack": "^1.0",
         "symfony/twig-bundle": "^3.4",
+        "symfony/validator": "^3.4",
         "symfony/yaml": "^3.4",
         "white-october/pagerfanta-bundle": "^1.1"
     },

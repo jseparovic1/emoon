@@ -11,6 +11,8 @@
         <field name="nameCanonical"/>
         <field name="symbol"/>
         <field name="rank" type="integer"/>
+        <field name="priceUsd" nullable="true"/>
+        <field name="marketCap" nullable="true"/>
         <field name="status" nullable="true"/>
         <field name="description" type="text" nullable="true"/>
         <field name="website" nullable="true"/>
