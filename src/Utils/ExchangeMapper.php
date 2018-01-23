@@ -11,7 +11,7 @@ class ExchangeMapper
 {
     /** @var array */
     protected $exchanges;
-    
+
     protected $exchangesNames = [
         CoinBase::class => 'coinbase',
         Bittrex::class => 'bittrex',
@@ -28,7 +28,7 @@ class ExchangeMapper
     public function getExchangeName(CoinListingInterface $exchange)
     {
         if (!array_key_exists(get_class($exchange), $this->exchangesNames)) {
-            throw new \Exception("Exchange ". get_class($exchange). " not mapped");
+            throw new \Exception('Exchange '.get_class($exchange).' not mapped');
         }
 
         return $this->exchangesNames[get_class($exchange)];

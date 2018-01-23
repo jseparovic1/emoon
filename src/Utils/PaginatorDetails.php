@@ -3,8 +3,7 @@
 namespace App\Utils;
 
 /**
- * Class PaginatorDetails
- * @package App\Utils
+ * Class PaginatorDetails.
  */
 class PaginatorDetails
 {
@@ -23,13 +22,13 @@ class PaginatorDetails
     /**
      * PaginatorDetails constructor.
      * @param string $route
-     * @param array $parameters
+     * @param array  $parameters
      */
     public function __construct(string $route, array $parameters)
     {
         $this->route = $route;
-        $this->limit = (int)($parameters['limit'] ?? 10);
-        $this->page = (int)($parameters['page'] ?? 1);
+        $this->limit = (int) ($parameters['limit'] ?? 10);
+        $this->page = (int) ($parameters['page'] ?? 1);
         $this->parameters = $parameters;
     }
 

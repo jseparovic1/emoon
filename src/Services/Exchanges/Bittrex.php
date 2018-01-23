@@ -8,8 +8,7 @@ use GuzzleHttp\ClientInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class Bittrex
- * @package App\Services\Exchanges
+ * Class Bittrex.
  */
 class Bittrex extends BaseExchange implements CoinListingInterface
 {
@@ -41,7 +40,7 @@ class Bittrex extends BaseExchange implements CoinListingInterface
         $coins = [];
 
         foreach ($data as $coin) {
-            $coins[] =  $this->getNormalizedCoinSymbol($coin->Currency);
+            $coins[] = $this->getNormalizedCoinSymbol($coin->Currency);
         }
 
         return $coins;

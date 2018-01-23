@@ -3,8 +3,7 @@
 namespace App\Services\Exchanges;
 
 /**
- * Class Exchange
- * @package App\Services\Exchanges
+ * Class Exchange.
  */
 abstract class Exchange
 {
@@ -15,7 +14,7 @@ abstract class Exchange
     ];
 
     /**
-     * Returns normalized coin symbol
+     * Returns normalized coin symbol.
      *
      * @param $symbol
      * @return mixed

@@ -7,8 +7,7 @@ use GuzzleHttp\ClientInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class CoinBase
- * @package App\Services\Exchanges
+ * Class CoinBase.
  */
 class CoinBase implements CoinListingInterface
 {
@@ -33,6 +32,7 @@ class CoinBase implements CoinListingInterface
 
         if ($response->getStatusCode() == Response::HTTP_OK) {
             $data = json_decode($response->getBody()->getContents());
+
             return $this->normalize($data);
         }
 

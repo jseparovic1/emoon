@@ -14,8 +14,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Class ExchangeCoinFetcher
- * @package App\Services
+ * Class ExchangeCoinFetcher.
  */
 class ExchangeCoinFetcher
 {
@@ -46,11 +45,11 @@ class ExchangeCoinFetcher
 
     /**
      * ExchangeCoinFetcher constructor.
-     * @param ExchangeMapper $exchangeMapper
-     * @param ExchangeRepository $exchangeRepository
-     * @param CoinRepository $coinRepository
+     * @param ExchangeMapper           $exchangeMapper
+     * @param ExchangeRepository       $exchangeRepository
+     * @param CoinRepository           $coinRepository
      * @param EventDispatcherInterface $eventDispatcher
-     * @param LoggerInterface $logger
+     * @param LoggerInterface          $logger
      */
     public function __construct(
         ExchangeMapper $exchangeMapper,
@@ -67,7 +66,7 @@ class ExchangeCoinFetcher
     }
 
     /**
-     * Update coin list for each exchange
+     * Update coin list for each exchange.
      */
     public function updateCoins()
     {
@@ -98,7 +97,7 @@ class ExchangeCoinFetcher
     }
 
     /**
-     * Calculates array dif and gets coins objects from database
+     * Calculates array dif and gets coins objects from database.
      * @param $coins
      * @param $storedCoins
      * @return array|mixed
@@ -114,7 +113,7 @@ class ExchangeCoinFetcher
     }
 
     /**
-     * Adds relation between exchange and coin
+     * Adds relation between exchange and coin.
      * @param Exchange $exchange
      * @param $coins
      */
@@ -131,7 +130,7 @@ class ExchangeCoinFetcher
     }
 
     /**
-     * Removes relation between exchange and coin
+     * Removes relation between exchange and coin.
      * @param Exchange $exchange
      * @param $coins
      */

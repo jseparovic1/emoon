@@ -22,6 +22,7 @@ class ExchangeController extends Controller
     public function index(): Response
     {
         $exchanges = $this->exchangeRepository->findAll();
+
         return $this->render('exchange/index.html.twig', compact('exchanges', $exchanges));
     }
 

@@ -12,8 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class CoinFetcher
- * @package App\Command
+ * Class CoinFetcher.
  */
 class CoinFetcher extends Command
 {
@@ -39,8 +38,8 @@ class CoinFetcher extends Command
     ) {
         $this->coinRepository = $coinRepository;
         $this->client = $client;
-        parent::__construct();
         $this->entityManager = $entityManager;
+        parent::__construct();
     }
 
     protected function configure()
@@ -55,7 +54,7 @@ class CoinFetcher extends Command
         $start = 0;
         $limit = 500;
 
-        $output->writeln("<info>Starting coin import, please brace yourself</info>");
+        $output->writeln('<info>Starting coin import, please brace yourself</info>');
         $output->writeln("<info>Limit {$limit}</info>");
 
         while (true) {
@@ -67,12 +66,12 @@ class CoinFetcher extends Command
             }
 
             $content = json_decode($response->getBody()->getContents());
-            
+
             $this->saveCoinData($content, $output);
             $start += $limit;
         }
 
-        $output->writeln("<success>Go celebrate, this is done!</success>");
+        $output->writeln('<success>Go celebrate, this is done!</success>');
     }
 
     protected function saveCoinData($data, $output)
@@ -83,24 +82,26 @@ class CoinFetcher extends Command
                 'symbol' => $coinData->symbol
             ]);
 
-            if ($coin instanceof Coin) {
-                if ((int)$coinData->rank !== $coin->getRank()) {
-                    $output->writeln("<info>Updating rank {$coin->getName()} OLD:{$coin->getRank()} NEW:{$coinData->rank}</info>");
+            if (!$coin instanceof Coin) {
+                $coin = new Coin();
+                $coin->setName($coinData->name);
+                $coin->setSymbol($coinData->symbol);
+                $coin->setRank($coinData->rank ?? null);
+                $coin->setNameCanonical($coinData->id);
+                $coin->setMarketCap($coinData->market_cap_usd ?? null);
+                $coin->setPriceUsd($coinData->price_usd);
+                $this->entityManager->persist($coin);
 
-                    $coin->setRank($coinData->rank);
-                    $this->entityManager->persist($coin);
-                }
-                continue;
+                $output->writeln("<success>Saving {$coin->getName()}</success>");
             }
 
-            $coin = new Coin();
-            $coin->setName($coinData->name);
-            $coin->setSymbol($coinData->symbol);
-            $coin->setRank($coinData->rank);
-            $coin->setNameCanonical($coinData->id);
-            $this->entityManager->persist($coin);
+            $output->writeln("<info>Updating rank {$coin->getName()} OLD:{$coin->getRank()} NEW:{$coinData->rank}</info>");
 
-            $output->writeln("<success>Saving {$coin->getName()}</success>");
+            $coin->setRank($coinData->rank);
+            $coin->setMarketCap($coinData->market_cap_usd);
+            $coin->setPriceUsd($coinData->price_btc);
+
+            $this->entityManager->persist($coin);
         }
 
         $this->entityManager->flush();
