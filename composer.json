@@ -2,9 +2,9 @@
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "dev",
-    "prefer-stable": "true",
+    "prefer-stable": true,
   "require": {
-        "php": "^7.0.8",
+        "php": "^7.1",
         "ext-iconv": "*",
         "eightpoints/guzzle-bundle": "^7.2",
         "knplabs/knp-time-bundle": "^1.8",
@@ -20,7 +20,8 @@
         "symfony/twig-bundle": "^3.4",
         "symfony/validator": "^3.4",
         "symfony/yaml": "^3.4",
-        "white-october/pagerfanta-bundle": "^1.1"
+        "white-october/pagerfanta-bundle": "^1.1",
+        "symplify/easy-coding-standard": "^3.0"
     },
     "require-dev": {
         "symfony/dotenv": "^3.4",

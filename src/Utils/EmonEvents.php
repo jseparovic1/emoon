@@ -3,8 +3,7 @@
 namespace App\Utils;
 
 /**
- * Class EmonEvents
- * @package App\Utils
+ * Class EmonEvents.
  */
 class EmonEvents
 {

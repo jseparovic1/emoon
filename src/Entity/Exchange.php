@@ -7,8 +7,7 @@ use Doctrine\ORM\PersistentCollection;
 use Gedmo\Timestampable\Traits\Timestampable;
 
 /**
- * Class Exchange
- * @package App\Entity
+ * Class Exchange.
  */
 class Exchange implements ResourceInterface
 {
@@ -17,22 +16,22 @@ class Exchange implements ResourceInterface
     /** @var mixed */
     protected $id;
 
-    /** @var  string */
+    /** @var string */
     protected $name;
 
-    /** @var  string */
+    /** @var string */
     protected $description;
 
-    /** @var  string */
+    /** @var string */
     protected $website;
 
-    /** @var  string */
+    /** @var string */
     protected $affiliateLink;
 
-    /** @var  string */
+    /** @var string */
     protected $twitter;
 
-    /** @var  ArrayCollection */
+    /** @var ArrayCollection */
     protected $coins;
 
     public function __construct()

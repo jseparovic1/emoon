@@ -16,4 +16,9 @@ class UserSubscribedEvent extends Event
     {
         $this->subscriber = $subscriber;
     }
+
+    public function getSubscriber(): Subscriber
+    {
+        return $this->subscriber;
+    }
 }

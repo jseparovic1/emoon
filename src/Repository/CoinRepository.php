@@ -26,7 +26,7 @@ class CoinRepository extends ServiceEntityRepository
         foreach ($coins as $coin) {
             $qb->orWhere("coin.symbol =:coin_{$i}");
             $qb->setParameter("coin_{$i}", $coin);
-            $i++;
+            ++$i;
         }
 
         return $qb->getQuery()->getResult();
@@ -46,7 +46,7 @@ class CoinRepository extends ServiceEntityRepository
     /**
      * {@inheritdoc}
      */
-    public function createPaginator(array $criteria = [], array $sorting = [], $itemsPerPage): iterable
+    public function createPaginator(array $criteria = [], array $sorting = [], $itemsPerPage = 10): iterable
     {
         $queryBuilder = $this->createQueryBuilder('o');
 
@@ -59,13 +59,13 @@ class CoinRepository extends ServiceEntityRepository
     /**
      * @param QueryBuilder $queryBuilder
      *
-     * @param int $maxPerPage
+     * @param  int        $maxPerPage
      * @return Pagerfanta
      */
     protected function getPaginator(QueryBuilder $queryBuilder, $maxPerPage = 10): Pagerfanta
     {
         // Use output walkers option in DoctrineORMAdapter should be false as it affects performance greatly (see #3775)
-        $pager =  new Pagerfanta(new DoctrineORMAdapter($queryBuilder, false, false));
+        $pager = new Pagerfanta(new DoctrineORMAdapter($queryBuilder, false, false));
         $pager->setMaxPerPage($maxPerPage);
 
         return $pager;
@@ -73,7 +73,7 @@ class CoinRepository extends ServiceEntityRepository
 
     /**
      * @param QueryBuilder $queryBuilder
-     * @param array $criteria
+     * @param array        $criteria
      */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = []): void
     {
@@ -92,15 +92,14 @@ class CoinRepository extends ServiceEntityRepository
                 $parameter = str_replace('.', '_', $property);
                 $queryBuilder
                     ->andWhere($queryBuilder->expr()->eq($name, ':'.$parameter))
-                    ->setParameter($parameter, $value)
-                ;
+                    ->setParameter($parameter, $value);
             }
         }
     }
 
     /**
      * @param QueryBuilder $queryBuilder
-     * @param array $sorting
+     * @param array        $sorting
      */
     protected function applySorting(QueryBuilder $queryBuilder, array $sorting = []): void
     {

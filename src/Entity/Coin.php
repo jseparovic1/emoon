@@ -6,8 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Timestampable\Traits\Timestampable;
 
 /**
- * Class Coin
- * @package App\Entity
+ * Class Coin.
  */
 class Coin implements ResourceInterface
 {
@@ -49,7 +48,7 @@ class Coin implements ResourceInterface
     /** @var string */
     private $imagePath;
 
-    /** @var  ArrayCollection */
+    /** @var ArrayCollection */
     private $exchanges;
 
     public function __construct()

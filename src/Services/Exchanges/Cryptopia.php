@@ -25,6 +25,7 @@ class Cryptopia extends BaseExchange implements CoinListingInterface
 
         if ($response->getStatusCode() == Response::HTTP_OK) {
             $data = json_decode($response->getBody()->getContents());
+
             return $this->normalize($data->Data);
         }
 
@@ -36,7 +37,7 @@ class Cryptopia extends BaseExchange implements CoinListingInterface
         $coins = [];
         foreach ($data as $coin) {
             if ($coin->ListingStatus == 'Active' && $coin->Status == 'OK') {
-                $coins[] =  $this->getNormalizedCoinSymbol($coin->Symbol);
+                $coins[] = $this->getNormalizedCoinSymbol($coin->Symbol);
             }
         }
 

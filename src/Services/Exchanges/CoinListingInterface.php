@@ -1,11 +1,9 @@
 <?php
 
-
 namespace App\Services\Exchanges;
 
 /**
- * Interface CoinListingInterface
- * @package App\Services\Exchanges
+ * Interface CoinListingInterface.
  */
 interface CoinListingInterface
 {

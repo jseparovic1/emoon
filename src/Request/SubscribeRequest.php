@@ -5,8 +5,7 @@ namespace App\Request;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class SubscribeRequest
- * @package App\Request
+ * Class SubscribeRequest.
  */
 class SubscribeRequest
 {

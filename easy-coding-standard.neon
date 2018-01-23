@@ -1,0 +1,13 @@
+includes:
+    - vendor/symplify/easy-coding-standard/config/clean-code.neon
+    - vendor/symplify/easy-coding-standard/config/symfony.neon
+
+checkers:
+    PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer:
+        syntax: short
+    PhpCsFixer\Fixer\Phpdoc\PhpdocNoPackageFixer: {}
+
+parameters:
+    exclude_checkers:
+        - PhpCsFixer\Fixer\ArrayNotation\TrailingCommaInMultilineArrayFixer
+        - PhpCsFixer\Fixer\ControlStructure\YodaStyleFixer

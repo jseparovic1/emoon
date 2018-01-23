@@ -12,8 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class CoinFetcher
- * @package App\Command
+ * Class CoinFetcher.
  */
 class CoinFetcher extends Command
 {
@@ -55,7 +54,7 @@ class CoinFetcher extends Command
         $start = 0;
         $limit = 500;
 
-        $output->writeln("<info>Starting coin import, please brace yourself</info>");
+        $output->writeln('<info>Starting coin import, please brace yourself</info>');
         $output->writeln("<info>Limit {$limit}</info>");
 
         while (true) {
@@ -67,12 +66,12 @@ class CoinFetcher extends Command
             }
 
             $content = json_decode($response->getBody()->getContents());
-            
+
             $this->saveCoinData($content, $output);
             $start += $limit;
         }
 
-        $output->writeln("<success>Go celebrate, this is done!</success>");
+        $output->writeln('<success>Go celebrate, this is done!</success>');
     }
 
     protected function saveCoinData($data, $output)

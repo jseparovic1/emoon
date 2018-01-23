@@ -7,15 +7,14 @@ use App\Event\UserSubscribedEvent;
 use App\Repository\SubscriberRepository;
 use App\Request\SubscribeRequest;
 use App\Utils\EmonEvents;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * Class SubscriptionController
- * @package App\Controller
+ * Class SubscriptionController.
  */
 class SubscriptionController
 {
@@ -25,7 +24,7 @@ class SubscriptionController
     private $validator;
 
     /**
-     * @var EventDispatcher
+     * @var EventDispatcherInterface
      */
     private $eventDispatcher;
 
@@ -36,7 +35,7 @@ class SubscriptionController
 
     public function __construct(
         ValidatorInterface $validator,
-        EventDispatcher $eventDispatcher,
+        EventDispatcherInterface $eventDispatcher,
         SubscriberRepository $subscriberRepository
     ) {
         $this->validator = $validator;
