@@ -1,7 +1,9 @@
 {
     "type": "project",
     "license": "proprietary",
-    "require": {
+    "minimum-stability": "dev",
+    "prefer-stable": "true",
+  "require": {
         "php": "^7.0.8",
         "ext-iconv": "*",
         "eightpoints/guzzle-bundle": "^7.2",
