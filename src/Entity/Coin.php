@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Timestampable\Traits\Timestampable;
 
 /**
@@ -19,42 +18,19 @@ class Coin implements ResourceInterface
     private $name;
 
     /** @var string */
-    private $nameCanonical;
-
-    /** @var string */
     private $symbol;
 
     /** @var string */
     private $priceUsd;
 
-    /** @var string */
-    private $marketCap;
-
     /** @var int */
     private $rank;
 
     /** @var string */
-    private $website;
-
-    /** @var string */
-    private $twitter;
-
-    /** @var string */
-    private $description;
-
-    /** @var string */
-    private $status;
-
-    /** @var string */
     private $imagePath;
 
-    /** @var ArrayCollection */
-    private $exchanges;
-
-    public function __construct()
-    {
-        $this->exchanges = new ArrayCollection();
-    }
+    /** @var integer */
+    private $canonicalId;
 
     public function getId()
     {
@@ -69,36 +45,6 @@ class Coin implements ResourceInterface
     public function setName(?string $name)
     {
         $this->name = $name;
-    }
-
-    public function getWebsite(): ?string
-    {
-        return $this->website;
-    }
-
-    public function setWebsite(?string $website)
-    {
-        $this->website = $website;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description)
-    {
-        $this->description = $description;
-    }
-
-    public function getTwitter(): ?string
-    {
-        return $this->twitter;
-    }
-
-    public function setTwitter(?string $twitter)
-    {
-        $this->twitter = $twitter;
     }
 
     public function setImagePath(string $imagePath)
@@ -131,45 +77,6 @@ class Coin implements ResourceInterface
         $this->rank = $rank;
     }
 
-    public function getStatus(): string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status)
-    {
-        $this->status = $status;
-    }
-
-    public function getExchanges(): ?ArrayCollection
-    {
-        return $this->exchanges;
-    }
-
-    public function addExchange(Exchange $exchange)
-    {
-        if ($this->exchanges->contains($exchange)) {
-            $this->exchanges->add($exchange);
-        }
-    }
-
-    public function removeExchange(Exchange $exchange)
-    {
-        if ($this->exchanges->contains($exchange)) {
-            $this->exchanges->removeElement($exchange);
-        }
-    }
-
-    public function getNameCanonical(): ?string
-    {
-        return $this->nameCanonical;
-    }
-
-    public function setNameCanonical(?string $nameCanonical)
-    {
-        $this->nameCanonical = $nameCanonical;
-    }
-
     public function getPriceUsd(): ?string
     {
         return $this->priceUsd;
@@ -180,13 +87,14 @@ class Coin implements ResourceInterface
         $this->priceUsd = $priceUsd;
     }
 
-    public function getMarketCap(): ?string
+    public function getCanonicalId(): ?int
     {
-        return $this->marketCap;
+        return $this->canonicalId;
     }
 
-    public function setMarketCap(?string $marketCap): void
+    public function setCanonicalId(?int $canonicalId): void
     {
-        $this->marketCap = $marketCap;
+        $this->canonicalId = $canonicalId;
     }
+
 }

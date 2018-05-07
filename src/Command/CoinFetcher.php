@@ -45,7 +45,7 @@ class CoinFetcher extends Command
     protected function configure()
     {
         $this
-            ->setName('emon:coins:load')
+            ->setName('app:coins:load')
             ->setDescription('Loads coins from crypto compare');
     }
 
@@ -59,7 +59,7 @@ class CoinFetcher extends Command
 
         while (true) {
             $output->writeln("<info>Start {$start}</info>");
-            $response = $this->client->get(sprintf('/v1/ticker?start=%s&limit=%s', $start, $limit));
+            $response = $this->client->get(sprintf('/v2/ticker?start=%s&limit=%s', $start, $limit));
 
             if ($response->getStatusCode() == Response::HTTP_NOT_FOUND) {
                 return;
@@ -67,7 +67,7 @@ class CoinFetcher extends Command
 
             $content = json_decode($response->getBody()->getContents());
 
-            $this->saveCoinData($content, $output);
+            $this->saveCoinData($content->data, $output);
             $start += $limit;
         }
 
@@ -87,20 +87,17 @@ class CoinFetcher extends Command
                 $coin->setName($coinData->name);
                 $coin->setSymbol($coinData->symbol);
                 $coin->setRank($coinData->rank ?? null);
-                $coin->setNameCanonical($coinData->id);
-                $coin->setMarketCap($coinData->market_cap_usd ?? null);
-                $coin->setPriceUsd($coinData->price_usd);
+                $coin->setCanonicalId($coinData->id);
+                $coin->setPriceUsd($coinData->quotes->USD->price);
                 $this->entityManager->persist($coin);
 
-                $output->writeln("<success>Saving {$coin->getName()}</success>");
+                $output->writeln("<info>Saving {$coin->getName()}</info>");
             }
 
             $output->writeln("<info>Updating rank {$coin->getName()} OLD:{$coin->getRank()} NEW:{$coinData->rank}</info>");
 
             $coin->setRank($coinData->rank);
-            $coin->setMarketCap($coinData->market_cap_usd);
-            $coin->setPriceUsd($coinData->price_btc);
-
+            $coin->setPriceUsd($coinData->quotes->USD->price);
             $this->entityManager->persist($coin);
         }
 

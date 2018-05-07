@@ -1,58 +1,18 @@
+{% import 'macros/coinImage.html.twig' as image %}
+
 {% extends "base.html.twig" %}
 
 {% block body %}
     <section class="container section">
         <div class="content">
-            <p class="title is-4">Latest data updated {{ exchanges[0].updatedAt|ago }}</p>
-                <table>
-                    <thead>
-                    <tr>
-                        <th></th>
-                        <th> Coins </th>
-                        {% for exchange in exchanges %}
-                            <th> {{ exchange.name|capitalize }} </th>
-                        {% endfor %}
-                    </tr>
-                    </thead>
-                    <tbody>
-                        {% for coin in coinsPager.getCurrentPageResults %}
-                            <tr>
-                                <td>
-                                    <figure class="image is-24x24">
-                                        <img src="https://files.coinmarketcap.com/static/img/coins/32x32/{{ coin.nameCanonical }}.png" alt="{{ coin.name }}">
-                                    </figure>
-                                </td>
-                                <td>{{ coin.name }}</td>
-                                {% for exchange in exchanges %}
-                                    <td>
-                                    {% if exchange.hasCoin(coin) %}
-                                        <span class="icon is-small has-text-success"><i class="fa fa-check"></i></span>
-                                    {% else %}
-                                        <span class="icon is-small has-text-danger"><i class="fa fa-times-circle"></i></span>
-                                    {% endif %}
-                                    </td>
-                                {% endfor %}
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        <nav class="pagination  is-centered" role="navigation" aria-label="pagination">
-            {% if coinsPager.hasPreviousPage %}
-                <a class="pagination-previous" href="{{ url('app_exchanges_list', { 'page': coinsPager.previousPage  }) }}">Previous</a>
-            {% else %}
-                  <a class="pagination-previous" disabled="true">Previous</a>
-            {% endif %}
-            <a class="pagination-next" href="{{ url('app_main', { 'page': coinsPager.nextPage }) }}">Next 100 -></a>
-        </nav>
+            Pitaj da dodaju faco
+        </div>
     </section>
-    {% include('_partials/hero.html.twig') %}
 {% endblock %}
 
 {% block javascripts %}
     <script>
         console.log("hi fuckers!");
-
     </script>
 {% endblock %}
 

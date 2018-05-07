@@ -8,16 +8,11 @@
             <generator strategy="IDENTITY"/>
         </id>
         <field name="name"/>
-        <field name="nameCanonical"/>
         <field name="symbol"/>
         <field name="rank" type="integer"/>
         <field name="priceUsd" nullable="true"/>
-        <field name="marketCap" nullable="true"/>
-        <field name="status" nullable="true"/>
-        <field name="description" type="text" nullable="true"/>
-        <field name="website" nullable="true"/>
-        <field name="twitter" nullable="true"/>
         <field name="imagePath" nullable="true"/>
+        <field name="canonicalId" type="integer"/>
         <field name="createdAt" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
@@ -28,6 +23,5 @@
             <index columns="symbol"/>
             <index columns="name"/>
         </indexes>
-        <many-to-many field="exchanges" mapped-by="coins" target-entity="App\Entity\Exchange"/>
     </entity>
 </doctrine-mapping>
